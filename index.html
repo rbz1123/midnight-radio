@@ -251,7 +251,7 @@
     .vinyl .label span {
       font-family: var(--display);
       font-size: clamp(13px, 1.6vw, 20px);
-      color: #241610;
+      color: #643b2a;
       line-height: 1.1;
       letter-spacing: .03em
     }
@@ -427,9 +427,38 @@
 
     .song .top {
       display: flex;
-      align-items: baseline;
-      gap: 14px;
+      align-items: center;
+      gap: 12px;
       flex-wrap: wrap
+    }
+
+    .song .play-dot {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--amber);
+      color: var(--bg);
+      font-size: 13px;
+      flex-shrink: 0;
+      box-shadow: 0 0 10px -4px var(--amber);
+      transition: transform .3s, box-shadow .3s
+    }
+
+    .song:hover .play-dot {
+      transform: scale(1.12);
+      box-shadow: 0 0 18px -4px var(--amber)
+    }
+
+    .play-hint {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .06em;
+      color: var(--brass);
+      padding: 10px 2px 0;
+      text-align: center
     }
 
     .song .title {
@@ -473,7 +502,7 @@
 
     .song .del-song {
       position: absolute;
-      right: 44px;
+      right: 10px;
       top: 50%;
       transform: translateY(-50%);
       background: none;
@@ -1016,6 +1045,7 @@
       <h2>点歌台<span class="en">JUKEBOX · 今夜歌单</span></h2>
       <span class="count" id="count">…</span>
     </div>
+    <p class="play-hint">▶ 点击任意歌曲即可播放 · 播完自动连播</p>
     <section class="songs" id="songs"></section>
 
     <section class="sign" id="sign">
@@ -1095,7 +1125,7 @@
   <script>
     // ---------- 深夜时段判断 ----------
     // 开门/关门时间：临时改 16:00 方便测试，正式发布请把 OPEN_HOUR 改回 23
-    const OPEN_HOUR = 16;
+    const OPEN_HOUR = 12;
     const CLOSE_HOUR = 5;
     function inMidnight() {
       if (new URLSearchParams(location.search).has('debug')) return true;
@@ -1142,6 +1172,7 @@
 
     async function deleteSong(id) {
       if (!sb) return;
+      if (!confirm('确定要删除这首歌吗？删除后无法恢复。')) return;
       const owner = getOwnerKey();
       const { error } = await sb.from('songs').delete().eq('id', id).eq('owner_key', owner);
       if (error) { toast('删除失败：' + error.message); return; }
@@ -1175,7 +1206,7 @@
         const nick = s.nickname ? `<span class="who">@${esc(s.nickname)}</span>` : '';
         const mine = (s.owner_key && s.owner_key === myOwner);
         return `<div class="song" data-id="${s.id}" data-url="${esc(s.url || '')}" data-title="${esc(s.title)}" data-artist="${esc(s.artist)}">
-          <div class="top"><span class="title">${esc(s.title)}</span><span class="artist">— ${esc(s.artist)}</span></div>
+          <div class="top"><span class="play-dot">▶</span><span class="title">${esc(s.title)}</span><span class="artist">— ${esc(s.artist)}</span></div>
           ${s.note ? `<div class="note">「${esc(s.note)}」</div>` : ''}
           <div class="meta">${nick} ${time}${mine ? ' · <span class="mine">我点的</span>' : ''}</div>
           ${mine ? '<button class="del-song" title="删除这首歌">×</button>' : ''}
