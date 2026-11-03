@@ -1053,7 +1053,7 @@
             <h1>
               <span class="w">把夜，</span><span class="w a">调到</span><span class="w r">最大声。</span>
             </h1>
-            <p class="sub">一台只在深夜启动的点唱机。每晚 23:00 之后，投进你此刻想分享的一首歌，送给未眠的人。</p>
+            <p class="sub">一台只在深夜启动的点唱机。每晚 22:00 之后，投进你此刻想分享的一首歌，送给未眠的人。</p>
             <div class="bar" id="bar"><i></i><span id="barText">…</span></div>
           </div>
         </div>
@@ -1077,7 +1077,7 @@
 
   <footer>
     <div>© 2026 MIDNIGHT FM · 只在深夜发声</div>
-    <div>88.6 MHz · 点歌请在 23:00 后</div>
+    <div>88.6 MHz · 点歌请在 22:00 后</div>
   </footer>
 
   <button id="addBtn" title="投进一首歌">＋ 添加歌曲</button>
@@ -1144,7 +1144,7 @@
   <script>
     // ---------- 深夜时段判断 ----------
     // 开门/关门时间：临时改 16:00 方便测试，正式发布请把 OPEN_HOUR 改回 23
-    const OPEN_HOUR = 12;
+    const OPEN_HOUR = 22;
     const CLOSE_HOUR = 5;
     function inMidnight() {
       if (new URLSearchParams(location.search).has('debug')) return true;
