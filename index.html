@@ -1086,7 +1086,7 @@
 
   <footer>
     <div>© 2026 MIDNIGHT FM · 只在深夜发声</div>
-    <div>88.6 MHz · 点歌请在 23:00 后</div>
+    <div>88.6 MHz · 点歌请在 22:00 后</div>
   </footer>
 
   <button id="addBtn" title="投进一首歌">＋ 添加歌曲</button>
@@ -1224,7 +1224,7 @@
       }
       cnt.textContent = data.length ? `共 ${data.length} 首` : '暂无点歌';
       if (!data.length) {
-        box.innerHTML = `<div class="empty"><span class="big">STILL QUIET</span>还没有人投币点歌。${inMidnight() ? '做今晚第一个点歌的人吧。' : '今晚 23:00 之后，来投第一首歌。'}</div>`;
+        box.innerHTML = `<div class="empty"><span class="big">STILL QUIET</span>还没有人投币点歌。${inMidnight() ? '做今晚第一个点歌的人吧。' : '今晚 22:00 之后，来投第一首歌。'}</div>`;
         return;
       }
       const myOwner = getOwnerKey();
