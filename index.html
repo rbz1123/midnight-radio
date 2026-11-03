@@ -467,8 +467,17 @@
     }
 
     @keyframes dotPulse {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 14px -2px var(--amber) }
-      50% { transform: scale(1.18); box-shadow: 0 0 24px 0 var(--amber) }
+
+      0%,
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 14px -2px var(--amber)
+      }
+
+      50% {
+        transform: scale(1.18);
+        box-shadow: 0 0 24px 0 var(--amber)
+      }
     }
 
     .play-hint {
@@ -1053,7 +1062,7 @@
             <h1>
               <span class="w">把夜，</span><span class="w a">调到</span><span class="w r">最大声。</span>
             </h1>
-            <p class="sub">一台只在深夜启动的点唱机。每晚 22:00 之后，投进你此刻想分享的一首歌，送给未眠的人。</p>
+            <p class="sub">一台只在深夜启动的点唱机。每晚 23:00 之后，投进你此刻想分享的一首歌，送给未眠的人。</p>
             <div class="bar" id="bar"><i></i><span id="barText">…</span></div>
           </div>
         </div>
@@ -1077,7 +1086,7 @@
 
   <footer>
     <div>© 2026 MIDNIGHT FM · 只在深夜发声</div>
-    <div>88.6 MHz · 点歌请在 22:00 后</div>
+    <div>88.6 MHz · 点歌请在 23:00 后</div>
   </footer>
 
   <button id="addBtn" title="投进一首歌">＋ 添加歌曲</button>
