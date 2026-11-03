@@ -452,6 +452,25 @@
       box-shadow: 0 0 18px -4px var(--amber)
     }
 
+    .song.playing {
+      background: rgba(255, 176, 0, .07);
+      border-radius: 12px
+    }
+
+    .song.playing .play-dot {
+      animation: dotPulse 2s ease-in-out infinite
+    }
+
+    .song.playing .title {
+      color: var(--amber);
+      text-shadow: 0 0 12px rgba(255, 176, 0, .6)
+    }
+
+    @keyframes dotPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 14px -2px var(--amber) }
+      50% { transform: scale(1.18); box-shadow: 0 0 24px 0 var(--amber) }
+    }
+
     .play-hint {
       font-family: var(--mono);
       font-size: 12px;
@@ -1240,9 +1259,16 @@
     });
 
     // 从歌单按索引播放（点击某首 / 自动连播都用它）
+    function highlightPlaying(index) {
+      document.querySelectorAll('.song').forEach((el, i) => {
+        el.classList.toggle('playing', i === index);
+      });
+    }
+
     async function playSongAt(index) {
       if (!playlist[index]) return;
       currentIndex = index;
+      highlightPlaying(index);
       await playSong(playlist[index].title, playlist[index].artist);
     }
 
